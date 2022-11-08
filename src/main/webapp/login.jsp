@@ -7,8 +7,13 @@
 	<title>Insert title here</title>
 	<link href="style.css" rel="stylesheet"></link>
 </head>
+
 <body>
-    <div class="container">
+	<header class="header">
+		<h1>HOLA</h1>
+	</header>
+	<div class="container">
+    <div class="divForm">
     <form id="form" method="post" action="loginExec">
         <div class="form-field">
             <label for="nombre">Nickname</label>
@@ -25,6 +30,7 @@
     </form>
 	<a href="register.jsp"><button class="btn">Registrate aqui</button></a>
     
+    </div>
     </div>
 
     <script src="login.js"></script>

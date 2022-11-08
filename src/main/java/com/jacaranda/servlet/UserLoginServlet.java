@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jacaranda.control.UserControl;
 import com.jacaranda.user.User;
@@ -49,16 +50,15 @@ public class UserLoginServlet extends HttpServlet {
 
 		String name = request.getParameter("nombre");
 		String password = request.getParameter("password");
-		UserControl uc = new UserControl();
-		User u = uc.readUser(name);
+		User u = UserControl.readUser(name);
 		String redirect="error.jsp";
 		if (u != null && (u.getPassword().equals(MD5(password)))) {
+			HttpSession sesion=request.getSession();
+			sesion.setAttribute("login", "True");
+			sesion.setAttribute("usuario", name);
 			redirect = "main.jsp";
 		}
-
-		response.getWriter()
-				.append("<html><head></head><body><script>location.href='" + redirect + "'</script></body></html>");
-
+		response.sendRedirect(redirect);
 	}
 
 	public static String MD5(String cadena) {

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jacaranda.control.UserControl;
 import com.jacaranda.user.User;
@@ -52,21 +53,17 @@ public class UserRegisterServlet extends HttpServlet {
 		char gender=request.getParameter("genero").charAt(0);
 		
 		User u=new User(nickname, name, lastName, email, MD5(password), gender, date, false);
-		UserControl uc = new UserControl();
 		String redirect="main.jsp";
-		if(uc.readUser(nickname)!=null) {//Comprobamos que el usuario no esté ya registrado
+		if(UserControl.readUser(nickname)!=null) {//Comprobamos que el usuario no esté ya registrado
 			redirect="errorRegister.jsp";
 		}
 		else {
-			uc.addUser(u);
+			UserControl.addUser(u);
+			HttpSession sesion=request.getSession();
+			sesion.setAttribute("login", "True");
+			sesion.setAttribute("usuario", name);
 		}
-		response.getWriter()
-		.append("<html><head></head><body><script>location.href='" + redirect + "'</script></body></html>");
-
-
-		
-		
-		doGet(request, response);
+		response.sendRedirect(redirect);
 	}
 	public static String MD5(String cadena) {
 		if (cadena == null || cadena.length() == 0) {

@@ -8,7 +8,11 @@
 	<link href="style.css" rel="stylesheet"></link>
 </head>
 <body>
+	<header class="header">
+		<h1>HOLA</h1>
+	</header>
     <div class="container">
+    <div class="divForm">
     <form id="form" method="post" action="registerExec">
         <div class="form-field">
             <label for="nombre">Nickname</label>
@@ -66,7 +70,7 @@
 
     </form>
     </div>
-
+	</div>
     <script src="register.js"></script>
 </body>
 </html>

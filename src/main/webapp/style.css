@@ -13,11 +13,14 @@
     box-sizing: border-box;
 }
 
-
-body {
+.header{
+	background-color: #009846;
+	height: 80px;
+}
+.container {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    background-color: #f4f4f4;
+    background-color: #ffffa2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,8 +29,8 @@ body {
     margin: 0;
 }
 
-.container {
-    background-color: #fff;
+.divForm {
+    background-color: #ffffff;
     padding: 1em;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -105,3 +108,6 @@ body {
 .btn:focus {
     outline: none;
 }
+
+
+

@@ -6,25 +6,15 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
 
 import com.jacaranda.user.User;
 
 public class UserControl {
-	private StandardServiceRegistry sr;
-	private SessionFactory sf;
-	private Session session;
 	
-	public UserControl() {
-		super();
-		sr = new StandardServiceRegistryBuilder().configure().build();
-		sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
-		session = sf.openSession();
-	}
-	public User readUser(String username) {
+	public static User readUser(String username) {
+		Session session = Connection.getSession();
+
 		User u=null;
 		try {
 			u= (User) session.get(User.class,username);
@@ -34,7 +24,9 @@ public class UserControl {
 		}
 		return u;
 	}
-	public boolean addUser(User u) {
+	public static boolean addUser(User u) {
+		Session session = Connection.getSession();
+
 		boolean resultado=false;
 		try {
 			session.getTransaction().begin();
@@ -48,8 +40,8 @@ public class UserControl {
 		return resultado;
 	}
 	
-	public List<User> loadList(){
-
+	public static List<User> loadList(){
+		Session session = Connection.getSession();
 		List<User> list= new ArrayList<>();
 		Query query=session.createQuery("SELECT u FROM USUARIO u");
 		list= query.getResultList();
