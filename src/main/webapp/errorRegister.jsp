@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>El usuario ya existe</h1>
+<h1>El usuario ya existe</h1><br>
+<a href="register.jsp">Volver</a>
 </body>
 </html>

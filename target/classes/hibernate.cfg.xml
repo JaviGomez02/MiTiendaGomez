@@ -5,8 +5,8 @@
  <session-factory name="">
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
   <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/CarritoCompra?useSSL=false</property>
-  <property name="hibernate.connection.username">jacaranda</property>
-  <property name="hibernate.connection.password">jacaranda</property>
+  <property name="hibernate.connection.username">gomez</property>
+  <property name="hibernate.connection.password">javi</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>

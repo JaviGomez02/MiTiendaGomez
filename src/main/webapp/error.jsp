@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Usuario y/o contraseña incorrectos</h1>
+<h1>Usuario y/o contraseña incorrectos</h1><br>
+<a href="login.jsp">Volver</a>
 </body>
 </html>
