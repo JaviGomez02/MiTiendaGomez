@@ -11,7 +11,7 @@
 	<header class="header">
 		<h1>HOLA</h1>
 	</header>
-    <div class="container">
+    <div class="container"><br><br>
     <div class="divForm">
     <form id="form" method="post" action="registerExec">
         <div class="form-field">
@@ -69,7 +69,7 @@
         <a href="login.jsp">Volver al login</a>
 
     </form>
-    </div>
+    </div><br><br>
 	</div>
     <script src="register.js"></script>
 </body>

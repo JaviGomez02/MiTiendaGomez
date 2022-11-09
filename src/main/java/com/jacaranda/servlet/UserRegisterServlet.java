@@ -53,17 +53,23 @@ public class UserRegisterServlet extends HttpServlet {
 		char gender=request.getParameter("genero").charAt(0);
 		
 		User u=new User(nickname, name, lastName, email, MD5(password), gender, date, false);
-		String redirect="main.jsp";
 		if(UserControl.readUser(nickname)!=null) {//Comprobamos que el usuario no esté ya registrado
-			redirect="errorRegister.jsp";
+			response.getWriter().append("<!DOCTYPE html>\n"
+					+ "<html>\n"
+					+ "<head>\n"
+					+ "<meta charset=\"ISO-8859-1\">\n"
+					+ "<title>Insert title here</title>\n"
+					+ "</head>\n"
+					+ "<body>\n"
+					+ "<h1>El usuario ya existe</h1><br>\n"
+					+ "<a href=\"register.jsp\">Volver</a>\n"
+					+ "</body>\n"
+					+ "</html>");
 		}
 		else {
 			UserControl.addUser(u);
-			HttpSession sesion=request.getSession();
-			sesion.setAttribute("login", "True");
-			sesion.setAttribute("usuario", name);
+			response.sendRedirect("login.jsp");
 		}
-		response.sendRedirect(redirect);
 	}
 	public static String MD5(String cadena) {
 		if (cadena == null || cadena.length() == 0) {
