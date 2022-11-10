@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.jacaranda.categoria.Categoria;
+
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 
 @Entity(name = "ARTICLES")
 public class Article {
@@ -26,6 +29,17 @@ public class Article {
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
+	@Transient
+	private String url;
+
+	
+	public Article(String nombre, String descripcion, Double precio, Categoria categoria) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.categoria = categoria;
+	}
 	public Article(int id, String nombre, String descripcion, Double precio, Categoria categoria) {
 		super();
 		this.id = id;
@@ -63,6 +77,13 @@ public class Article {
 	public Double getPrecio() {
 		return precio;
 	}
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
@@ -86,9 +107,10 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", categoria=" + categoria + "]";
+				+ ", categoria=" + categoria + ", url=" + url + "]";
 	}
 	
+
 	
 
 }

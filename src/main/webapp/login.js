@@ -1,8 +1,5 @@
 const usernameEl=document.querySelector('#nombre');
-const feoguapoEl=document.querySelector('#feoguapo');
 const passwordEl=document.querySelector('#password');
-const cPasswordEl=document.querySelector('#cPassword')
-const emailEl=document.querySelector('#email');
 
 const form=document.querySelector('#form');
 
@@ -10,16 +7,7 @@ const form=document.querySelector('#form');
 const isRequired = value => value === '' ? false : true;
 //Funcion para comprobar el tamaño
 const isBetween = (length, min, max) => length < min || length > max ? false : true;
-//Funcion para comprobar si el email es valido
-const isEmailValid = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-};
-//Funcion para comprobar si la contraseña es fuerte(Strong)
-const isPasswordSecure = (password) => {
-    const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-    return re.test(password);
-};
+
 
 //Funcion para marcar el error
 const showError = (input, message) => {

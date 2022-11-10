@@ -74,8 +74,12 @@ public class UserLoginServlet extends HttpServlet {
 					+ "    <title>Document</title>\n"
 					+ "</head>\n"
 					+ "<body>\n"
-					+ "<p>Bienvenido "+ name + "</p>"
-					+ "<table border='1' class=\"tabla\">\n"
+					+ "<p>Bienvenido "+ name + "</p>");
+			if(u.isAdmin()==true) {
+				out.println("<a href='annadirArticulo.jsp'>Anadir articulo</a><br><br>");
+			}
+			out.println(
+					"<table border='1' class=\"tabla\">\n"
 					+ "	<tr>\n"
 					+ "		<td>\n"
 					+ "			Nombre\n"

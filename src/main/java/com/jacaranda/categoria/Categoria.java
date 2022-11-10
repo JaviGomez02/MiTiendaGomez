@@ -22,6 +22,14 @@ public class Categoria {
 	private String descripcion;
 	@OneToMany(mappedBy="categoria", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Article> articulos;
+	
+	public Categoria(String nombre, String descripcion, List<Article> articulos) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.articulos = articulos;
+	}
+
 	public Categoria(int id, String nombre, String descripcion) {
 		super();
 		this.id = id;
