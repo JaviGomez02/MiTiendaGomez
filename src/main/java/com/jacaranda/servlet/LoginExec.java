@@ -24,13 +24,13 @@ import com.jacaranda.user.User;
  * Servlet implementation class UserServlet
  */
 @WebServlet("/loginExec")
-public class UserLoginServlet extends HttpServlet {
+public class LoginExec extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserLoginServlet() {
+	public LoginExec() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -53,14 +53,26 @@ public class UserLoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String name = request.getParameter("nombre");
-		String password = request.getParameter("password");
+		HttpSession sesion=request.getSession();
+		
+		String name = (String) sesion.getAttribute("usuario");
+		String password = (String) sesion.getAttribute("password");
+		System.out.println(name);
+		
+		if (name==null && password==null) {
+			name = request.getParameter("nombre");
+			password = request.getParameter("password");
+			
+			sesion.setAttribute("login", "True");
+			sesion.setAttribute("usuario", name);
+			sesion.setAttribute("password", password);
+		}
+		System.out.println(name);
+		System.out.println(password);
 		User u = UserControl.readUser(name);
 		
 		if (u != null && (u.getPassword().equals(MD5(password)))) {
-			HttpSession sesion=request.getSession();
-			sesion.setAttribute("login", "True");
-			sesion.setAttribute("usuario", name);
+			
 			List<Article> listaArticulos=ArticleControl.loadList();
 			
 			PrintWriter out=response.getWriter();
@@ -74,7 +86,8 @@ public class UserLoginServlet extends HttpServlet {
 					+ "    <title>Document</title>\n"
 					+ "</head>\n"
 					+ "<body>\n"
-					+ "<p>Bienvenido "+ name + "</p>");
+					+ "<p>Bienvenido "+ name + "</p>"
+					+ "<a href='cerrarSesion.jsp'>Cerrar sesion</a>");
 			if(u.isAdmin()==true) {
 				out.println("<a href='annadirArticulo.jsp'>Anadir articulo</a><br><br>");
 			}
@@ -119,17 +132,7 @@ public class UserLoginServlet extends HttpServlet {
 					+ "</html>  ");
 		}
 		else {
-			response.getWriter().append("<!DOCTYPE html>\n"
-					+ "<html>\n"
-					+ "<head>\n"
-					+ "<meta charset=\"ISO-8859-1\">\n"
-					+ "<title>Insert title here</title>\n"
-					+ "</head>\n"
-					+ "<body>\n"
-					+ "<h1>Usuario y/o contraseña incorrectos</h1><br>\n"
-					+ "<a href=\"login.jsp\">Volver</a>\n"
-					+ "</body>\n"
-					+ "</html>");
+			response.sendRedirect("errorUsuario.jsp");
 		}
 	}
 

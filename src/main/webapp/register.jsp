@@ -66,7 +66,7 @@
             <small></small>
         </div><br>
         <button class="btn" type="submit">Enviar</button><br><br>
-        <a href="login.jsp">Volver al login</a>
+        <a href="index.jsp">Volver al login</a>
 
     </form>
     </div><br><br>

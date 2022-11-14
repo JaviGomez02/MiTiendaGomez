@@ -11,8 +11,21 @@
 <link href="style.css" rel="stylesheet"></link>
 </head>
 <body>
+<%
+String bienvenida="";
+HttpSession sesion=request.getSession();
+String isSesion = (String) sesion.getAttribute("login");
+String userSesion= (String) sesion.getAttribute("usuario");
+if(isSesion != null && userSesion!=null && isSesion.equals("True")){
+	bienvenida=("Sesion: "+userSesion);
+}
+else{
+%> <jsp:forward page="errorUsuario.jsp"></jsp:forward> <%
+}
+%>
 <header class="header">
 		<h1>HOLA</h1>
+		<%=bienvenida %>
 	</header>
 	<div class="container">
 	<h1>ANNADIR ARTICULO</h1><br>
@@ -47,11 +60,15 @@
             <small></small>
         </div><br>
         <div class="form-field">
-            <label for="imagen">Imagen</label>
-            <input type="file" id="imagen" name="imagen" required>
+            <label for="imagen">Imagen (Opcional)</label>
+            <input type="file" id="imagen" name="imagen">
             <small></small>
         </div><br>
-        <button class="btn" type="submit">Annadir</button><br><br><br>
+        <button class="btn" type="submit">Annadir</button><br><br>
+    </form>
+    <form method="post" action="loginExec">
+    
+    	<button class="btnCancel" type="submit">Cancelar</button><br>
     </form>
     
     </div>

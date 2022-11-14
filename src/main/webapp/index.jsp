@@ -26,9 +26,9 @@
             <input type="password" id="password" name="password" >
             <small></small>
         </div><br>
-        <button class="btn" type="submit">Entrar</button><br><br><br>
+        <button class="btn" type="submit">Entrar</button><br><br>
     </form>
-	<a href="register.jsp"><button class="btn">Registrate aqui</button></a>
+	<a href="register.jsp">¿No tienes una cuenta? Click aqui para registrarte.</a>
     
     </div>
     </div>

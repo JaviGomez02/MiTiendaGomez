@@ -20,13 +20,13 @@ import com.jacaranda.user.User;
  * Servlet implementation class UserRegisterServlet
  */
 @WebServlet("/registerExec")
-public class UserRegisterServlet extends HttpServlet {
+public class RegisterExec extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserRegisterServlet() {
+    public RegisterExec() {
         super();
         // TODO Auto-generated constructor stub
     }
