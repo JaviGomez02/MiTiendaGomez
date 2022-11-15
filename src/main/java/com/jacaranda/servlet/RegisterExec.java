@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jacaranda.control.UserControl;
+import com.jacaranda.control.Utilidades;
 import com.jacaranda.user.User;
 
 /**
@@ -52,46 +53,14 @@ public class RegisterExec extends HttpServlet {
 		LocalDate date=LocalDate.parse(request.getParameter("fecha"));
 		char gender=request.getParameter("genero").charAt(0);
 		
-		User u=new User(nickname, name, lastName, email, MD5(password), gender, date, false);
+		User u=new User(nickname, name, lastName, email, Utilidades.MD5(password), gender, date, false);
 		if(UserControl.readUser(nickname)!=null) {//Comprobamos que el usuario no esté ya registrado
-			response.getWriter().append("<!DOCTYPE html>\n"
-					+ "<html>\n"
-					+ "<head>\n"
-					+ "<meta charset=\"ISO-8859-1\">\n"
-					+ "<title>Insert title here</title>\n"
-					+ "</head>\n"
-					+ "<body>\n"
-					+ "<h1>El usuario ya existe</h1><br>\n"
-					+ "<a href=\"register.jsp\">Volver</a>\n"
-					+ "</body>\n"
-					+ "</html>");
+			response.sendRedirect("error.jsp?msg=2");
 		}
 		else {
 			UserControl.addUser(u);
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp");
 		}
-	}
-	public static String MD5(String cadena) {
-		if (cadena == null || cadena.length() == 0) {
-			return null;
-		}
-		try {
-			MessageDigest md5 = MessageDigest.getInstance("MD5");
-			md5.update(cadena.getBytes());
-			byte[] byteArray = md5.digest();
-
-			BigInteger bigInt = new BigInteger(1, byteArray);
-			// El parámetro 16 significa hexadecimal
-			String result = bigInt.toString(16);
-			// Relleno de ceros de orden superior de menos de 32 bits
-			while (result.length() < 32) {
-				result = "0" + result;
-			}
-			return result;
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }

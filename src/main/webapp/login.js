@@ -8,6 +8,10 @@ const isRequired = value => value === '' ? false : true;
 //Funcion para comprobar el tamaño
 const isBetween = (length, min, max) => length < min || length > max ? false : true;
 
+const isPasswordSecure = (password) => {
+    const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    return re.test(password);
+};
 
 //Funcion para marcar el error
 const showError = (input, message) => {

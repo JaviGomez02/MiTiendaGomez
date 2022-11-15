@@ -54,7 +54,6 @@ else{
             	for(Categoria c:lista){
             		%><option value="<%=c.getId()%>"><%=c.getNombre() %></option><%
             	}
-            
             %>
             </select>
             <small></small>

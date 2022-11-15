@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import com.jacaranda.article.Article;
 import com.jacaranda.control.ArticleControl;
 import com.jacaranda.control.UserControl;
+import com.jacaranda.control.Utilidades;
 import com.jacaranda.user.User;
 
 /**
@@ -52,27 +53,32 @@ public class LoginExec extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		//Recupero la sesión
 		HttpSession sesion=request.getSession();
 		
-		String name = (String) sesion.getAttribute("usuario");
-		String password = (String) sesion.getAttribute("password");
-		System.out.println(name);
 		
-		if (name==null && password==null) {
+		
+		//Obtengo los valores de la sesión
+		String name = (String) sesion.getAttribute("usuario");
+		User u=UserControl.readUser(name);
+		String password = (String) sesion.getAttribute("password");
+		
+		//Si los valores son nulos, le asigno el nuevo usuario a la sesion
+		if (u==null) {
 			name = request.getParameter("nombre");
 			password = request.getParameter("password");
+			
+			u=UserControl.readUser(name);
 			
 			sesion.setAttribute("login", "True");
 			sesion.setAttribute("usuario", name);
 			sesion.setAttribute("password", password);
 		}
-		System.out.println(name);
-		System.out.println(password);
-		User u = UserControl.readUser(name);
+
 		
-		if (u != null && (u.getPassword().equals(MD5(password)))) {
-			
+		//Si el usuario existe y la contraseña es correcta, accede a la pagina
+		if (u != null && (u.getPassword().equals(Utilidades.MD5(password)))) {
+
 			List<Article> listaArticulos=ArticleControl.loadList();
 			
 			PrintWriter out=response.getWriter();
@@ -88,7 +94,7 @@ public class LoginExec extends HttpServlet {
 					+ "<body>\n"
 					+ "<p>Bienvenido "+ name + "</p>"
 					+ "<a href='cerrarSesion.jsp'>Cerrar sesion</a>");
-			if(u.isAdmin()==true) {
+			if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
 				out.println("<a href='annadirArticulo.jsp'>Anadir articulo</a><br><br>");
 			}
 			out.println(
@@ -132,31 +138,10 @@ public class LoginExec extends HttpServlet {
 					+ "</html>  ");
 		}
 		else {
-			response.sendRedirect("errorUsuario.jsp");
+			response.sendRedirect("error.jsp?msg=1");
 		}
 	}
 
-	public static String MD5(String cadena) {
-		if (cadena == null || cadena.length() == 0) {
-			return null;
-		}
-		try {
-			MessageDigest md5 = MessageDigest.getInstance("MD5");
-			md5.update(cadena.getBytes());
-			byte[] byteArray = md5.digest();
-
-			BigInteger bigInt = new BigInteger(1, byteArray);
-			// El parámetro 16 significa hexadecimal
-			String result = bigInt.toString(16);
-			// Relleno de ceros de orden superior de menos de 32 bits
-			while (result.length() < 32) {
-				result = "0" + result;
-			}
-			return result;
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	
 
 }

@@ -13,6 +13,7 @@
 	</header>
     <div class="container"><br><br>
     <div class="divForm">
+    <h1 align="center">Register</h1><br><hr></hr><br>
     <form id="form" method="post" action="registerExec">
         <div class="form-field">
             <label for="nombre">Nickname</label>
@@ -65,7 +66,7 @@
             <input type="date" id="fecha" name="fecha">
             <small></small>
         </div><br>
-        <button class="btn" type="submit">Enviar</button><br><br>
+        <button class="btn" type="submit">Registrarse</button><br><br>
         <a href="index.jsp">Volver al login</a>
 
     </form>

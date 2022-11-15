@@ -14,6 +14,8 @@
 	</header>
 	<div class="container">
     <div class="divForm">
+    <h1 align="center">Login</h1><br><hr></hr><br>
+    
     <form id="form" method="post" action="loginExec">
         <div class="form-field">
             <label for="nombre">Nickname</label>

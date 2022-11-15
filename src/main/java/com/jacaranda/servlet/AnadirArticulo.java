@@ -56,17 +56,30 @@ public class AnadirArticulo extends HttpServlet {
 			}
 			ArticleControl.addArticle(a);
 			
-			
-			out.println("<!DOCTYPE html>\n"
-					+ "<html lang=\"en\">\n"
+
+			out.println("\n"
+					+ "<!DOCTYPE html>\n"
+					+ "<html>\n"
 					+ "<head>\n"
-					+ "    <meta charset=\"UTF-8\">\n"
-					+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
-					+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-					+ "    <title>Document</title>\n"
+					+ "<meta charset=\"UTF-8\">\n"
+					+ "<title>Insert title here</title>\n"
+					+ "<link href=\"style.css\" rel=\"stylesheet\"></link>\n"
 					+ "</head>\n"
 					+ "<body>\n"
-					+ "<h1>"+a.toString()+"</h1>"
+					+ "\n"
+					+ "<header class=\"header\">\n"
+					+ "		<h1>HOLA</h1>\n"
+					+ "</header>\n"
+					+ "<div class=\"container\">\n"
+					+ "	<div class=\"divNormal\">	\n"
+					+ "<form action='loginExec' method='post'>"
+					+ "		<h1>Articulo annadido correctamente!!</h1><br><br>\n"
+					+ "		<h3>Articulo: "+a.getNombre()+"</h3><br>\n"
+					+ "		<button type='submit'>Volver a la lista</button>\n"
+					+ "</form>"
+					+ "	</div>\n"
+					+ "</div>\n"
+					+ "\n"
 					+ "</body>\n"
 					+ "</html>");
 		} catch (Exception e) {

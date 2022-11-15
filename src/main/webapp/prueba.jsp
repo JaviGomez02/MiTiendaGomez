@@ -1,4 +1,4 @@
-<%@page import="com.jacaranda.control.CategoriaControl"%>
+<%-- <%@page import="com.jacaranda.control.CategoriaControl"%>
 <%@page import="com.jacaranda.categoria.Categoria"%>
 <%@page import="com.jacaranda.control.ArticleControl"%>
 <%@page import="com.jacaranda.article.Article"%>
@@ -39,4 +39,6 @@ for (User u: lista){
 %>
 
 </body>
-</html>
+</html> --%>
+
+
