@@ -24,8 +24,13 @@ else{
 }
 %>
 <header class="header">
-		<h1>HOLA</h1>
+		<img src="img/logo1-removebg-preview.png" class="logo1">
+
+		<img src="img/logo2-removebg-preview.png" class="logo2">
+		<div>
+			
 		<%=bienvenida %>
+		</div>
 	</header>
 	<div class="container">
 	<h1>ANNADIR ARTICULO</h1><br>

@@ -105,8 +105,14 @@ public class LoginExec extends HttpServlet {
 					+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
 					+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
 					+ "    <title>Document</title>\n"
+					+ "	<link href=\"style.css\" rel=\"stylesheet\"></link>"
 					+ "</head>\n"
 					+ "<body>\n"
+					+ "<header class=\"header\">\r\n"
+					+ "		<img src=\"img/logo1-removebg-preview.png\" class=\"logo1\">\r\n"
+					+ "		<img src=\"img/logo2-removebg-preview.png\" class=\"logo2\">\r\n"
+					+ "	</header>"
+					+ "<div class=\"container\">"
 					+ "<p>Bienvenido "+ name + "</p>"
 					+ "<a href='cerrarSesion.jsp'>Cerrar sesion</a>");
 			if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
@@ -149,6 +155,7 @@ public class LoginExec extends HttpServlet {
 					
 					out.println("\n"
 					+ "</table>"
+					+ "</div>"
 					+ "</body>\n"
 					+ "</html>  ");
 		}

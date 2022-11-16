@@ -9,7 +9,9 @@
 </head>
 <body>
 	<header class="header">
-		<h1>HOLA</h1>
+		<img src="img/logo1-removebg-preview.png" class="logo1">
+
+		<img src="img/logo2-removebg-preview.png" class="logo2">
 	</header>
     <div class="container"><br><br>
     <div class="divForm">
