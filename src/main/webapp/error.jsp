@@ -17,10 +17,20 @@ if (msg!=null){
 	case "1":
 		error="Usuario y/o contraseña incorrectos";
 		break;
-	case "2":{
+	case "2":
 		error="Usuario ya existente";
 		redirect="register.jsp";
-	}
+		break;
+	case "3":
+		error="Debe iniciar sesion";
+		break;
+	case "4":
+		error="No se han introducido todos los parametros";
+		break;
+	case "5":
+		error="No se han introducido todos los parametros";
+		redirect="annadirArticulo.jsp";
+		break;
 	}
 }
 %>

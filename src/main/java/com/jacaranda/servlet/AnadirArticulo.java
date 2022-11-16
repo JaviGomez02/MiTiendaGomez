@@ -42,21 +42,29 @@ public class AnadirArticulo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String url=request.getParameter("imagen");
 		String name=request.getParameter("nombre");
 		String description=request.getParameter("description");
-		Double price=Double.parseDouble(request.getParameter("price"));
-		Categoria c=CategoriaControl.readCategoria(Integer.parseInt(request.getParameter("categoria")));
-		PrintWriter out=response.getWriter();
+		String price=request.getParameter("price");
+		String c=request.getParameter("categoria");
 		
-		try {
-			Article a=new Article(name, description, price, c);
-			if (url!=null) {
-				a.setUrl(url);
-			}
+		
+		PrintWriter out=response.getWriter();
+		Boolean error=false;
+		int msgError=0;
+		
+		
+		if(name==null || name.isEmpty() || description==null || description.isEmpty() || price==null || price.isEmpty() || c==null || c.isEmpty()) {
+			error=true;
+			msgError=5;
+		}
+		
+		if(error) {
+			response.sendRedirect("error.jsp?msg="+msgError);
+		}
+		else {
+			Article a=new Article(name, description, Double.parseDouble(price), CategoriaControl.readCategoria(Integer.parseInt(c)));	
 			ArticleControl.addArticle(a);
 			
-
 			out.println("\n"
 					+ "<!DOCTYPE html>\n"
 					+ "<html>\n"
@@ -82,20 +90,8 @@ public class AnadirArticulo extends HttpServlet {
 					+ "\n"
 					+ "</body>\n"
 					+ "</html>");
-		} catch (Exception e) {
-			out.println("<!DOCTYPE html>\n"
-					+ "<html lang=\"en\">\n"
-					+ "<head>\n"
-					+ "    <meta charset=\"UTF-8\">\n"
-					+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
-					+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-					+ "    <title>Document</title>\n"
-					+ "</head>\n"
-					+ "<body>\n"
-					+ "<h1>ERROR</h1>"
-					+ "</body>\n"
-					+ "</html>");
 		}
+
 		
 	}
 

@@ -9,6 +9,7 @@
 </head>
 
 <body>
+<%session.invalidate(); %>
 	<header class="header">
 		<h1>HOLA</h1>
 	</header>

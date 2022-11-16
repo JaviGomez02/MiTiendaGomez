@@ -1,9 +1,7 @@
 package com.jacaranda.servlet;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -11,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jacaranda.control.UserControl;
 import com.jacaranda.control.Utilidades;
@@ -50,15 +47,32 @@ public class RegisterExec extends HttpServlet {
 		String email=request.getParameter("email");
 		String name=request.getParameter("nombrePropio");
 		String lastName=request.getParameter("apellidos");
-		LocalDate date=LocalDate.parse(request.getParameter("fecha"));
-		char gender=request.getParameter("genero").charAt(0);
+		String date=request.getParameter("fecha");
+		String gender=request.getParameter("genero");
 		
-		User u=new User(nickname, name, lastName, email, Utilidades.MD5(password), gender, date, false);
-		if(UserControl.readUser(nickname)!=null) {//Comprobamos que el usuario no esté ya registrado
-			response.sendRedirect("error.jsp?msg=2");
+
+		boolean error=false;
+		int msgError=0;
+		
+		if(nickname!=null && password!=null && email!=null && name!=null && lastName!=null && date!=null && gender!=null && !nickname.isEmpty() && !password.isEmpty() && !email.isEmpty() && !name.isEmpty() && !lastName.isEmpty() && !date.isEmpty() && !gender.isEmpty()) {
+			if(UserControl.readUser(nickname)!=null) {//Comprobamos que el usuario no esté ya registrado
+				error=true;
+				msgError=2;
+			}
+			else {
+				User u=new User(nickname, name, lastName, email, Utilidades.MD5(password), gender.charAt(0), LocalDate.parse(date), false);
+				UserControl.addUser(u);
+			}
 		}
 		else {
-			UserControl.addUser(u);
+			error=true;
+			msgError=4;
+			
+		}
+		if(error) {
+			response.sendRedirect("error.jsp?msg="+msgError);
+		}
+		else {
 			response.sendRedirect("index.jsp");
 		}
 	}

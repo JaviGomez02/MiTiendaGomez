@@ -20,7 +20,7 @@ if(isSesion != null && userSesion!=null && isSesion.equals("True")){
 	bienvenida=("Sesion: "+userSesion);
 }
 else{
-%> <jsp:forward page="errorUsuario.jsp"></jsp:forward> <%
+%> <jsp:forward page="error.jsp?msg=3"></jsp:forward> <%
 }
 %>
 <header class="header">

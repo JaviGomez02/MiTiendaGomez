@@ -29,8 +29,8 @@ public class Article {
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
-	@Transient
-	private String url;
+//	@Transient
+//	private String url;
 
 	
 	public Article(String nombre, String descripcion, Double precio, Categoria categoria) {
@@ -78,12 +78,12 @@ public class Article {
 		return precio;
 	}
 	
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
+//	public String getUrl() {
+//		return url;
+//	}
+//	public void setUrl(String url) {
+//		this.url = url;
+//	}
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
@@ -107,7 +107,7 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", categoria=" + categoria + ", url=" + url + "]";
+				+ ", categoria=" + categoria + "]";
 	}
 	
 

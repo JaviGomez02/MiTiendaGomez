@@ -2,10 +2,7 @@ package com.jacaranda.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -53,31 +50,49 @@ public class LoginExec extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//Recupero la sesión
+		
+		
+		//Obtengo los parametros
+		String name = request.getParameter("nombre");
+		String password = request.getParameter("password");
+		
+		//Obtengo la sesión
 		HttpSession sesion=request.getSession();
 		
+		//Declaro variables
+		Boolean error=false;
+		int msgError=0;
+		User u = null;
 		
-		
-		//Obtengo los valores de la sesión
-		String name = (String) sesion.getAttribute("usuario");
-		User u=UserControl.readUser(name);
-		String password = (String) sesion.getAttribute("password");
-		
-		//Si los valores son nulos, le asigno el nuevo usuario a la sesion
-		if (u==null) {
-			name = request.getParameter("nombre");
-			password = request.getParameter("password");
-			
+		if (name==null || password==null || name.isEmpty() || password.isEmpty()) { //Si no se han introducido parametros, compruebo la sesion
+			name = (String) sesion.getAttribute("usuario");
+			password = (String) sesion.getAttribute("password");
+			if (name==null || password==null) { //Si no existe sesión mando el error
+				error=true;
+				msgError=4;
+			}
+			else { //Si existe la sesión recojo el usuario
+				u=UserControl.readUser(name);
+			}
+		}
+		else {//Si se han introducido parametros, compruebo el usuario
 			u=UserControl.readUser(name);
-			
-			sesion.setAttribute("login", "True");
-			sesion.setAttribute("usuario", name);
-			sesion.setAttribute("password", password);
+			if (u==null || (!u.getPassword().equals(Utilidades.MD5(password)))) { //Si el usuario no existe o la contraseña es incorrecta mando el error
+				error=true;
+				msgError=1;
+			}
+			else { //Si el usuario es correcto creo la sesión
+				sesion.setAttribute("login", "True");
+				sesion.setAttribute("usuario", name);
+				sesion.setAttribute("password", password);
+				
+			}
 		}
 
+
 		
-		//Si el usuario existe y la contraseña es correcta, accede a la pagina
-		if (u != null && (u.getPassword().equals(Utilidades.MD5(password)))) {
+		//Si el usuario existe en la base de datos y la contraseña es correcta, accede a la pagina
+		if (!error) {
 
 			List<Article> listaArticulos=ArticleControl.loadList();
 			
@@ -138,7 +153,7 @@ public class LoginExec extends HttpServlet {
 					+ "</html>  ");
 		}
 		else {
-			response.sendRedirect("error.jsp?msg=1");
+			response.sendRedirect("error.jsp?msg="+msgError);
 		}
 	}
 
