@@ -23,13 +23,13 @@
     <form id="form" method="post" action="loginExec">
         <div class="form-field">
             <label for="nombre">Nickname</label>
-            <input type="text" id="nombre" name="nombre" >
+            <input type="text" id="nombre" name="nombre" required>
             <small></small>
 
         </div><br>
         <div class="form-field">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" >
+            <input type="password" id="password" name="password" required>
             <small></small>
         </div><br>
         <button class="btn" type="submit">Entrar</button><br><br>

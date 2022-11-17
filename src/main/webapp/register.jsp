@@ -19,39 +19,39 @@
     <form id="form" method="post" action="registerExec">
         <div class="form-field">
             <label for="nombre">Nickname</label>
-            <input type="text" id="nombre" name="nombre" >
+            <input type="text" id="nombre" name="nombre" required >
             <small></small>
 
         </div><br>
         <div class="form-field">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombrePropio" name="nombrePropio" >
+            <input type="text" id="nombrePropio" name="nombrePropio" required>
             <small></small>
 
         </div><br>
         <div class="form-field">
             <label for="nombre">Apellidos</label>
-            <input type="text" id="apellidos" name="apellidos" >
+            <input type="text" id="apellidos" name="apellidos" required>
             <small></small>
 
         </div><br>
         <div class="form-field">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" >
+            <input type="password" id="password" name="password" required>
             <small></small>
 
         </div><br>
 
         <div class="form-field">
             <label for="cPassword">Confirmar Contraseña</label>
-            <input type="password" id="cPassword" >
+            <input type="password" id="cPassword" required>
             <small></small>
 
         </div><br>
 
         <div class="form-field">
             <label for="email">Introduce tu email</label>
-            <input type="email" id="email" name="email" >
+            <input type="email" id="email" name="email" required>
             <small></small>
 
         </div><br>
@@ -65,7 +65,7 @@
         </div><br>
         <div class="form-field">
         	<label for="fecha">Fecha de nacimiento</label>
-            <input type="date" id="fecha" name="fecha">
+            <input type="date" id="fecha" name="fecha" required>
             <small></small>
         </div><br>
         <button class="btn" type="submit">Registrarse</button><br><br>

@@ -32,7 +32,10 @@ create table CarritoCompra.ARTICLES (
 CREATE TABLE CarritoCompra.USUARIO_ARTICLES(
 	name_usuario VARCHAR(50),
 	id_article INT,
-	CONSTRAINT PK PRIMARY KEY (name_usuario,id_article),
+    fecha DATE,
+    cantidad INT,
+    precio DECIMAL(5,2),
+	CONSTRAINT PK PRIMARY KEY (name_usuario,id_article, fecha),
 	CONSTRAINT FK1 FOREIGN KEY (id_article) REFERENCES ARTICLES(id) ON DELETE CASCADE,
 	CONSTRAINT FK2 FOREIGN KEY (name_usuario) REFERENCES USUARIO(nickname) ON DELETE CASCADE
 );
