@@ -45,6 +45,7 @@ public class AnadirArticulo extends HttpServlet {
 		String name=request.getParameter("nombre");
 		String description=request.getParameter("description");
 		String price=request.getParameter("price");
+		String stock=request.getParameter("stock");
 		String c=request.getParameter("categoria");
 		
 		
@@ -53,7 +54,7 @@ public class AnadirArticulo extends HttpServlet {
 		int msgError=0;
 		
 		
-		if(name==null || name.isEmpty() || description==null || description.isEmpty() || price==null || price.isEmpty() || c==null || c.isEmpty()) {
+		if(name==null || name.isEmpty() || description==null || description.isEmpty() || price==null || price.isEmpty() || c==null || c.isEmpty() || stock==null || stock.isEmpty()) {
 			error=true;
 			msgError=5;
 		}
@@ -62,7 +63,7 @@ public class AnadirArticulo extends HttpServlet {
 			response.sendRedirect("error.jsp?msg="+msgError);
 		}
 		else {
-			Article a=new Article(name, description, Double.parseDouble(price), CategoriaControl.readCategoria(Integer.parseInt(c)));	
+			Article a=new Article(name, description, Double.parseDouble(price), Integer.parseInt(stock), CategoriaControl.readCategoria(Integer.parseInt(c)));	
 			ArticleControl.addArticle(a);
 			
 			out.println("\n"

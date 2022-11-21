@@ -26,6 +26,8 @@ public class Article {
 	private String descripcion;
 	@Column(name="price")
 	private Double precio;
+	@Column(name="stock")
+	private int stock;
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
@@ -33,19 +35,21 @@ public class Article {
 //	private String url;
 
 	
-	public Article(String nombre, String descripcion, Double precio, Categoria categoria) {
+	public Article(String nombre, String descripcion, Double precio, int stock, Categoria categoria) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.stock=stock;
 		this.categoria = categoria;
 	}
-	public Article(int id, String nombre, String descripcion, Double precio, Categoria categoria) {
+	public Article(int id, String nombre, String descripcion, Double precio, int stock, Categoria categoria) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.stock=stock;
 		this.categoria = categoria;
 	}
 	public Article() {
@@ -64,6 +68,12 @@ public class Article {
 	}
 	public String getNombre() {
 		return nombre;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;

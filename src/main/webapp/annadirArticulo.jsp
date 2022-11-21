@@ -51,7 +51,11 @@ else{
             <label for="price">Price</label>
             <input type="number" id="price" name="price" step="0.01" min="1" max="1000" required>
             <small></small>
-        </div><br>
+        </div><br><div class="form-field">
+            <label for="price">Stock</label>
+            <input type="number" id="stock" name="stock" min="1" required>
+            <small></small>
+        </div><br>        
         <div class="form-field">
             <label for="categoria">Categoria</label>
             <select id="categoria" name="categoria" required>

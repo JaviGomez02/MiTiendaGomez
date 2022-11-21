@@ -1,6 +1,9 @@
 const nameEl=document.querySelector('#nombre');
 const descriptionEl=document.querySelector('#description');
 const priceEl=document.querySelector('#price');
+const stockEl=document.querySelector('#stock')
+
+console.log(stockEl);
 
 const form=document.querySelector('#form');
 
@@ -90,13 +93,31 @@ const checkPrice = () => {
     return valid;
 }
 
+const checkStock = () => {
+
+    let valid = false;
+    const min = 1;
+    const stock = stockEl.value.trim();
+
+    if (!isRequired(stock)) { 
+        showError(stockEl, 'El campo no puede estar vacio.');
+    } else if (!isBetween(parseFloat(stock), min)) { //Despues comprueba que tenga la longitud permitida
+        showError(stockEl, `El stock debe ser mayor a 0.`) 
+    } else {
+        showSuccess(stockEl);
+        valid = true;
+    }
+    return valid;
+}
+
 form.addEventListener('submit', function (e){
 
     let isNameValid=checkName();
     let isDescriptionValid=checkDescription();
 	let isPriceValid=checkPrice();
+	let isStockValid=checkStock();
 
-    let isFormValid=isNameValid && isDescriptionValid && isPriceValid;
+    let isFormValid=isNameValid && isDescriptionValid && isPriceValid && isStockValid;
 
     if (!isFormValid){
         e.preventDefault();
@@ -115,6 +136,10 @@ form.addEventListener('input', function (e) {
         }
         case 'price':{
             checkPrice();
+            break;
+        }
+        case 'stock':{
+            checkStock();
             break;
         }
     }
