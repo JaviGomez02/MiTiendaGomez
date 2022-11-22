@@ -2,7 +2,7 @@ package com.jacaranda.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jacaranda.article.Article;
+import com.jacaranda.carrito.Carrito;
+import com.jacaranda.carrito.CarritoItem;
 import com.jacaranda.control.ArticleControl;
 import com.jacaranda.control.UserControl;
 import com.jacaranda.control.Utilidades;
@@ -88,8 +90,31 @@ public class LoginExec extends HttpServlet {
 				
 			}
 		}
-
-
+		
+		//Carrito
+		Carrito miCarro;
+		miCarro=(Carrito) sesion.getAttribute("miCarro");
+		if (miCarro==null) {
+			miCarro= new Carrito();
+			sesion.setAttribute("miCarro", miCarro);
+		}
+		
+		String idItem=request.getParameter("idItem");
+		if(idItem!=null) {
+			String cantidad=request.getParameter("cantidadItem");
+			String precio=request.getParameter("precioItem");
+			CarritoItem c = new CarritoItem (u.getNickname(), Integer.parseInt(idItem), Integer.parseInt(cantidad), Double.parseDouble(precio), LocalDateTime.now());
+			if (miCarro.getItems().contains(c)) {
+				int cantidadNueva=miCarro.getItems().get(miCarro.getItems().indexOf(c)).getCantidad()+Integer.parseInt(cantidad);
+				miCarro.getItems().get(miCarro.getItems().indexOf(c)).setCantidad(cantidadNueva);
+			}
+			else {
+				miCarro.addItem(c);
+			}
+			
+		}
+		System.out.println(miCarro.getItems().toString());
+		
 		
 		//Si el usuario existe en la base de datos y la contraseña es correcta, accede a la pagina
 		if (!error) {
@@ -111,56 +136,47 @@ public class LoginExec extends HttpServlet {
 					+ "<header class=\"header\">\r\n"
 					+ "		<img src=\"img/logo1-removebg-preview.png\" class=\"logo1\">\r\n"
 					+ "		<img src=\"img/logo2-removebg-preview.png\" class=\"logo2\">\r\n"
+					
+					+ "		<a href='carrito.jsp'><img src=\"img/carrito.png\" class=\"carritoImg\"></a>"
+					+ "<a href=\"index.jsp\"><img src=\"img/usuario2.png\" class=\"usuarioImg\"></a>"
+
 					+ "	</header>"
-					+ "<div class=\"container\">"
+					+ "<div class=\"container2\">"
+					+ "<p>Contador "+ miCarro.getItems().size()+ "</p>"
 					+ "<p>Bienvenido "+ name + "</p>"
 					+ "<a href='cerrarSesion.jsp'>Cerrar sesion</a>");
 			if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
 				out.println("<a href='annadirArticulo.jsp'>Anadir articulo</a><br><br>");
 			}
-			out.println(
-					"<table border='1' class=\"tabla\">\n"
-					+ "	<tr>\n"
-					+ "		<td>\n"
-					+ "			Nombre\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Descripcion\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Precio\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Stock\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Categoria\n"
-					+ "		</td>	\n"
-					+ "	</tr>\n");
 			for(Article a:listaArticulos) {
-				out.print("<tr>\n"
-						+"<td>\n"
-						+a.getNombre()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getDescripcion()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getPrecio()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getStock()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getCategoria().getNombre()+"\n"
-						+"</td>\n"
-						+"</tr>\n"
+				out.print(
+								"<div class=\"gallery-container\">\n"
+						+ "			<div class=\"titulo_categoria\">\n"
+						+ 				a.getCategoria().getNombre()
+						+ "			</div>\n"
+						+ "			<div class=\"titulo_articulo\">\n"
+						+ 				a.getNombre()
+						+ "			</div>\n"
+						+ "         <div class=\"img_articulo\">\n"
+						+ "             <img src=\"sin_nombre\" > \n"
+						+ "         </div>\n"
+						+ "         <div class=\"precio_articulo\">\n"
+						+ 				a.getPrecio()
+						+ "         </div>\n"
+						+ "         <div class=\"comprar_articulo\">\n"
+						+ "				<form action=\"loginExec\" method='post'>\n"
+						+ "            		<input type=\"number\" name='cantidadItem' min='1' value='1'>\n"
+						+ "            		<input type=\"text\" hidden name='idItem' value="+a.getId()+">\n"
+						+ "            		<input type=\"text\" hidden name='precioItem' value="+a.getPrecio()+">\n"
+						+ "            		<button type=\"submit\">Anadir al carrito</button>\n"
+						+ "        		</form>"
+						+ "         </div>\n"
+						+ "     </div>"
 						);
 				
 			}
 					
 					out.println("\n"
-					+ "</table>"
 					+ "</div>"
 					+ "</body>\n"
 					+ "</html>  ");

@@ -12,6 +12,14 @@ public class Carrito {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public List<CarritoItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<CarritoItem> items) {
+		this.items = items;
+	}
+
 	public boolean addItem(CarritoItem c) {
 		boolean resultado=false;
 		if(!items.contains(c)) {

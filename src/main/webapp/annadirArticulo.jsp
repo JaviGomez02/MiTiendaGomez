@@ -27,6 +27,9 @@ else{
 		<img src="img/logo1-removebg-preview.png" class="logo1">
 
 		<img src="img/logo2-removebg-preview.png" class="logo2">
+		<img src="img/carrito.png" class="carritoImg">
+		<a href="index.jsp"><img src="img/usuario2.png" class="usuarioImg"></a>
+		
 		<div>
 			
 		<%=bienvenida %>

@@ -38,6 +38,7 @@ if (msg!=null){
 		<img src="img/logo1-removebg-preview.png" class="logo1">
 
 		<img src="img/logo2-removebg-preview.png" class="logo2">
+		<a href="index.jsp"><img src="img/usuario2.png" class="usuarioImg"></a>
 </header>
 <div class="container">
 	<div class="divNormal">	

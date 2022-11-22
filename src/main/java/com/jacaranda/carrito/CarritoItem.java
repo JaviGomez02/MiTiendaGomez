@@ -61,9 +61,16 @@ public class CarritoItem {
 		this.fecha = fecha;
 	}
 
+
+	@Override
+	public String toString() {
+		return "CarritoItem [usuario=" + usuario + ", idItem=" + idItem + ", cantidad=" + cantidad + ", precio="
+				+ precio + ", fecha=" + fecha + "]";
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(fecha, idItem, usuario);
+		return Objects.hash(idItem, usuario);
 	}
 
 	@Override
@@ -75,8 +82,9 @@ public class CarritoItem {
 		if (getClass() != obj.getClass())
 			return false;
 		CarritoItem other = (CarritoItem) obj;
-		return Objects.equals(fecha, other.fecha) && idItem == other.idItem && Objects.equals(usuario, other.usuario);
+		return idItem == other.idItem && Objects.equals(usuario, other.usuario);
 	}
-	
+
+
 	
 }
