@@ -46,4 +46,12 @@ public class Carrito {
 		}
 		return resultado;
 	}
+	
+	public int getCantidadTotal() {
+		int cantidad=0;
+		for(CarritoItem c: this.items) {
+			cantidad+=c.getCantidad();
+		}
+		return cantidad;
+	}
 }

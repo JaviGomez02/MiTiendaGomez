@@ -92,29 +92,11 @@ public class LoginExec extends HttpServlet {
 		}
 		
 		//Carrito
-		Carrito miCarro;
-		miCarro=(Carrito) sesion.getAttribute("miCarro");
-		if (miCarro==null) {
-			miCarro= new Carrito();
-			sesion.setAttribute("miCarro", miCarro);
+		Carrito miCarro=(Carrito) sesion.getAttribute("miCarro");
+		int contador=0;
+		if(miCarro!=null) {
+			contador=miCarro.getCantidadTotal();
 		}
-		
-		String idItem=request.getParameter("idItem");
-		if(idItem!=null) {
-			String cantidad=request.getParameter("cantidadItem");
-			String precio=request.getParameter("precioItem");
-			CarritoItem c = new CarritoItem (u.getNickname(), Integer.parseInt(idItem), Integer.parseInt(cantidad), Double.parseDouble(precio), LocalDateTime.now());
-			if (miCarro.getItems().contains(c)) {
-				int cantidadNueva=miCarro.getItems().get(miCarro.getItems().indexOf(c)).getCantidad()+Integer.parseInt(cantidad);
-				miCarro.getItems().get(miCarro.getItems().indexOf(c)).setCantidad(cantidadNueva);
-			}
-			else {
-				miCarro.addItem(c);
-			}
-			
-		}
-		System.out.println(miCarro.getItems().toString());
-		
 		
 		//Si el usuario existe en la base de datos y la contraseña es correcta, accede a la pagina
 		if (!error) {
@@ -137,17 +119,16 @@ public class LoginExec extends HttpServlet {
 					+ "		<img src=\"img/logo1-removebg-preview.png\" class=\"logo1\">\r\n"
 					+ "		<img src=\"img/logo2-removebg-preview.png\" class=\"logo2\">\r\n"
 					
-					+ "		<a href='carrito.jsp'><img src=\"img/carrito.png\" class=\"carritoImg\"></a>"
+					+"		<a href='carrito.jsp'><img src=\"img/carrito.png\" class='carritoImg'></a>"
 					+ "<a href=\"index.jsp\"><img src=\"img/usuario2.png\" class=\"usuarioImg\"></a>"
-
+					+ "<p class='name'>"+name+"</p>"
 					+ "	</header>"
 					+ "<div class=\"container2\">"
-					+ "<p>Contador "+ miCarro.getItems().size()+ "</p>"
-					+ "<p>Bienvenido "+ name + "</p>"
 					+ "<a href='cerrarSesion.jsp'>Cerrar sesion</a>");
 			if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
 				out.println("<a href='annadirArticulo.jsp'>Anadir articulo</a><br><br>");
 			}
+			
 			for(Article a:listaArticulos) {
 				out.print(
 								"<div class=\"gallery-container\">\n"
@@ -163,9 +144,12 @@ public class LoginExec extends HttpServlet {
 						+ "         <div class=\"precio_articulo\">\n"
 						+ 				a.getPrecio()
 						+ "         </div>\n"
+						+ "         <div class=\"stock_articulo\">\n"
+						+ 				"Stock:"+a.getStock()
+						+ "         </div>\n"
 						+ "         <div class=\"comprar_articulo\">\n"
-						+ "				<form action=\"loginExec\" method='post'>\n"
-						+ "            		<input type=\"number\" name='cantidadItem' min='1' value='1'>\n"
+						+ "				<form action=\"AnadirCarrito\" method='post'>\n"
+						+ "            		<input type=\"number\" name='cantidadItem' min='1' max='"+a.getStock()+"' value='1'>\n"
 						+ "            		<input type=\"text\" hidden name='idItem' value="+a.getId()+">\n"
 						+ "            		<input type=\"text\" hidden name='precioItem' value="+a.getPrecio()+">\n"
 						+ "            		<button type=\"submit\">Anadir al carrito</button>\n"
