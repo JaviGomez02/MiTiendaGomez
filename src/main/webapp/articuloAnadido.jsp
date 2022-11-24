@@ -8,13 +8,27 @@
 <link href="style.css" rel="stylesheet"></link>
 </head>
 <body>
+<%
+String bienvenida="";
+HttpSession sesion=request.getSession();
+String isSesion = (String) sesion.getAttribute("login");
+String userSesion= (String) sesion.getAttribute("usuario");
+if(isSesion != null && userSesion!=null && isSesion.equals("True")){
+	bienvenida=userSesion;
+}
+else{
+%> <jsp:forward page="error.jsp?msg=3"></jsp:forward> <%
+}
+%>
 
 <header class="header">
-		<img src="img/logo1-removebg-preview.png" class="logo1">
-
+		<a><img src="img/logo1-removebg-preview.png" class="logo1"></a>
 		<img src="img/logo2-removebg-preview.png" class="logo2">
-		<a href="carrito.jsp"><img src="img/carrito.png" class="carritoImg"></a>
-		<a href="index.jsp"><img src="img/usuario2.png" class="usuarioImg"></a>
+		<div class="headerRight ">
+			
+			<a href="carrito.jsp" class="tooltip"><img src="img/carrito.png" class="carritoImg"><span class="tooltiptext"></span></a>
+			<a href="index.jsp" class="tooltip"><img src="img/usuario2.png" class="usuarioImg"><span class="tooltiptext"><%=bienvenida %></span></a>
+		</div>
 		
 </header>
 

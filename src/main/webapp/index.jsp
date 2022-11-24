@@ -11,12 +11,15 @@
 <body>
 <%session.invalidate(); %>
 	<header class="header">
-
-		<img src="img/logo1-removebg-preview.png" class="logo1">
-
+		<a><img src="img/logo1-removebg-preview.png" class="logo1"></a>
 		<img src="img/logo2-removebg-preview.png" class="logo2">
-		<a href="index.jsp"><img src="img/usuario2.png" class="usuarioImg"></a>
-	</header>
+		<div class="headerRight ">
+			
+			<a href="index.jsp" class="tooltip"><img src="img/usuario2.png" class="usuarioImg"><span class="tooltiptext">Inicie sesion</span></a>
+		</div>
+		
+</header>
+
 	<div class="container">
     <div class="divForm">
     <h1 align="center">Login</h1><br><hr></hr><br>

@@ -98,6 +98,10 @@ public class LoginExec extends HttpServlet {
 			contador=miCarro.getCantidadTotal();
 		}
 		
+		String admin="";
+		if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
+			admin="<a href='annadirArticulo.jsp' class='enlace'>Anadir articulo</a>";
+		}
 		//Si el usuario existe en la base de datos y la contraseña es correcta, accede a la pagina
 		if (!error) {
 
@@ -115,23 +119,24 @@ public class LoginExec extends HttpServlet {
 					+ "	<link href=\"style.css\" rel=\"stylesheet\"></link>"
 					+ "</head>\n"
 					+ "<body>\n"
-					+ "<header class=\"header\">\r\n"
-					+ "		<img src=\"img/logo1-removebg-preview.png\" class=\"logo1\">\r\n"
-					+ "		<img src=\"img/logo2-removebg-preview.png\" class=\"logo2\">\r\n"
-					
-					+"		<a href='carrito.jsp'><img src=\"img/carrito.png\" class='carritoImg'></a>"
-					+ "<a href=\"index.jsp\"><img src=\"img/usuario2.png\" class=\"usuarioImg\"></a>"
-					+ "<p class='name'>"+name+"</p>"
-					+ "	</header>"
-					+ "<div class=\"container2\">"
-					+ "<a href='cerrarSesion.jsp'>Cerrar sesion</a>");
-			if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
-				out.println("<a href='annadirArticulo.jsp'>Anadir articulo</a><br><br>");
-			}
+					+ "<header class=\"header\">\n"
+					+ "		<a><img src=\"img/logo1-removebg-preview.png\" class=\"logo1\"></a>\n"
+					+ "		<img src=\"img/logo2-removebg-preview.png\" class=\"logo2\">\n"
+					+ "		<div class=\"headerRight \">\n"
+					+ "			\n"
+					+ admin
+					+ "<a href='cerrarSesion.jsp' class='enlace'>Cerrar sesion</a>"
+					+ "			<a href=\"carrito.jsp\" class=\"tooltip\"><img src=\"img/carrito.png\" class=\"carritoImg\"><span class=\"tooltiptext\">"+contador+"</span></a>\n"
+					+ "			<a href=\"index.jsp\" class=\"tooltip\"><img src=\"img/usuario2.png\" class=\"usuarioImg\"><span class=\"tooltiptext\">"+name+"</span></a>\n"
+					+ "		</div>\n"
+					+ "		\n"
+					+ "</header>\n"
+					+ ""
+					+ "<div class=\"container2\">");
+			
 			
 			for(Article a:listaArticulos) {
-				out.print(
-								"<div class=\"gallery-container\">\n"
+				out.print("<div class=\"gallery-container\">\n"
 						+ "			<div class=\"titulo_categoria\">\n"
 						+ 				a.getCategoria().getNombre()
 						+ "			</div>\n"

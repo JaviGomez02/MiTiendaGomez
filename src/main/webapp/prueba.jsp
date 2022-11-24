@@ -1,4 +1,4 @@
-<%-- <%@page import="com.jacaranda.control.CategoriaControl"%>
+<%@page import="com.jacaranda.control.CategoriaControl"%>
 <%@page import="com.jacaranda.categoria.Categoria"%>
 <%@page import="com.jacaranda.control.ArticleControl"%>
 <%@page import="com.jacaranda.article.Article"%>
@@ -14,31 +14,24 @@
 <jsp:useBean id="Usuario" class="com.jacaranda.user.User"></jsp:useBean>
 
 <title>Insert title here</title>
+<link href="style.css" rel="stylesheet"></link>
+
 </head>
 <body>
-hola
-<%
-/* List<User> lista=new ArrayList<>();
-lista=UsuarioBD.loadList();
-for (User u: lista){
-	out.print(u.toString()+"<br>");
-}
- */
- /* List<Categoria> lista=new ArrayList<>();
- lista=CategoriaControl.loadList();
- for (Categoria a: lista){
- 	out.print(a.toString()+"<br>");
- } */
- 
- List<Article> lista=new ArrayList<>();
- lista=ArticleControl.loadList();
- for (Article a: lista){
- 	out.print(a.toString()+"<br>");
- }
 
-%>
+<header class="header">
+		<a><img src="img/logo1-removebg-preview.png" class="logo1"></a>
+		<img src="img/logo2-removebg-preview.png" class="logo2">
+		<div class="headerRight ">
+			
+			<a href="carrito.jsp" class="tooltip"><img src="img/carrito.png" class="carritoImg"><span class="tooltiptext">Tooltip text</span></a>
+			<a href="index.jsp" class="tooltip"><img src="img/usuario2.png" class="usuarioImg"><span class="tooltiptext">a</span></a>
+		</div>
+		
+</header>
+
 
 </body>
-</html> --%>
+</html>
 
 
