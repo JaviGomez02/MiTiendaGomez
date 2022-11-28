@@ -1,3 +1,4 @@
+<%@page import="com.jacaranda.article.Article"%>
 <%@page import="com.jacaranda.control.ArticleControl"%>
 <%@page import="com.jacaranda.carrito.CarritoItem"%>
 <%@page import="com.jacaranda.carrito.Carrito"%>
@@ -49,7 +50,14 @@ if(miCarro!=null){
 	if(miCarro!=null){
 		for (CarritoItem c: miCarro.getItems()){%>
 			<div class="item">
-				<%=ArticleControl.readArticle(c.getIdItem()).toString() %>
+				<%Article a= ArticleControl.readArticle(c.getIdItem());%>
+				<h1><%=a.getNombre() %></h1>
+				<p>Precio: <%=a.getPrecio() %></p>
+				<form method="post" action="ActualizarCantidad">
+					Cantidad: <input type="number" name="nuevaCantidad" id="nuevaCantidad" value="<%=c.getCantidad() %>" min="1" max="<%=a.getStock()%>">
+					<input type="text" value="<%=c.getIdItem() %>" hidden name="idItem" id="idItem">
+					<button type="submit">Modificar cantidad</button>
+				</form>
 			</div>
 		<%
 		}
@@ -63,7 +71,51 @@ if(miCarro!=null){
 		
 	</div>
 	<div class="factura">
-		<h1>FACTURA</h1>
+		<div class="cuenta">
+		<h1>Factura</h1><br>
+			<%
+			if(miCarro!=null){
+				for (CarritoItem c: miCarro.getItems()){
+					Article a= ArticleControl.readArticle(c.getIdItem());
+					int cantidad=c.getCantidad();
+				%>
+					<p>- <%=a.getNombre() %> x <%=cantidad %>: <%=Math.round((a.getPrecio() * cantidad) *100.0)/100.0 %>€</p>
+				<%
+				}
+			}
+			else{%>
+				<h1>No hay items</h1>
+			<%	
+			}
+			%>
+			
+		</div>
+		<div class="total">
+		<hr><br>
+		<%
+			if(miCarro!=null){
+				double precioTotal=0;
+				for (CarritoItem c: miCarro.getItems()){
+					Article a= ArticleControl.readArticle(c.getIdItem());
+					precioTotal=precioTotal+a.getPrecio()*c.getCantidad();
+				
+				}
+				precioTotal=Math.round(precioTotal *100.0)/100.0;
+				%>
+				
+				<h1>Total: <%= precioTotal%>€</h1><br><br><br>
+				<form method="post" action="AnadirCompra">
+					<button type="submit" class="btn">Comprar</button>
+				</form>
+			<%
+			}
+			else{%>
+				<h1>No hay items</h1>
+			<%	
+			}
+			%>
+		</div>
+		
 	</div>
 
 </div>

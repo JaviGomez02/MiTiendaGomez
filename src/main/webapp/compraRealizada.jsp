@@ -34,14 +34,12 @@ else{
 
 <div class="container">
 	<div class="divNormal">	
-		<h2>Articulo anadido al carrito:</h2>
+		<h2>Compra realizada con exito!!</h2><br>
 	
 		<form action="loginExec" method="post">
 			<button class="btn" type="submit">Seguir comprando</button>
 		</form><br>
-		<form action="carrito.jsp">
-			<button class="btn" type="submit">Ir al carrito</button>
-		</form>
+
 	
 	</div>
 </div>
