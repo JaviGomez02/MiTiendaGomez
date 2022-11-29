@@ -137,6 +137,8 @@ body{
     margin-top:40px;
 }
 
+
+
 .factura{
 	grid-area: 1 / 2 / 2 / 3;
 	margin:20px;
@@ -174,11 +176,31 @@ body{
 	scroll-behavior: smooth;
 }
 
+.containerListaCompra{
+	font-family: 'Open Sans', sans-serif;
+	display:grid;
+	grid-template-columns: repeat(1fr);
+    grid-auto-rows: 200px;
+    height: 100vh;
+    margin-top:40px;
+}
+
+
+
 .item{
 	margin:20px;
 	border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	background-color: aquamarine;
+	padding: 10px;
+}
+
+.itemListaCompra{
+	margin:20px;
+	border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    padding: 10px;
 }
 
 

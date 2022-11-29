@@ -117,8 +117,10 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", categoria=" + categoria + "]";
+				+ ", stock=" + stock + ", categoria=" + categoria + "]";
 	}
+	
+	
 	
 
 	

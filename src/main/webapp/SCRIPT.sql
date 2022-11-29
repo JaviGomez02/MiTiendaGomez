@@ -33,7 +33,7 @@ create table CarritoCompra.ARTICLES (
 CREATE TABLE CarritoCompra.USUARIO_ARTICLES(
 	name_usuario VARCHAR(50),
 	id_article INT,
-    fecha DATE,
+    fecha DATETIME,
     cantidad INT,
     precio DECIMAL(5,2),
 	CONSTRAINT PK PRIMARY KEY (name_usuario,id_article, fecha),

@@ -26,7 +26,7 @@ else{
 		<img src="img/logo2-removebg-preview.png" class="logo2">
 		<div class="headerRight ">
 			
-			<a href="carrito.jsp" class="tooltip"><img src="img/carrito.png" class="carritoImg"></a>
+			<a href="carrito.jsp" class="tooltip"><img src="img/carrito.png" class="carritoImg"><span class="tooltiptext"></span></a>
 			<a href="index.jsp" class="tooltip"><img src="img/usuario2.png" class="usuarioImg"><span class="tooltiptext"><%=bienvenida %></span></a>
 		</div>
 		
@@ -34,12 +34,11 @@ else{
 
 <div class="container">
 	<div class="divNormal">	
-		<h2>Compra realizada con exito!!</h2><br>
+		<h2>Pedido cancelado</h2><br>
 	
 		<form action="loginExec" method="post">
-			<button class="btn" type="submit">Seguir comprando</button>
+			<button class="btn" type="submit">Volver a la lista</button>
 		</form><br>
-
 	
 	</div>
 </div>

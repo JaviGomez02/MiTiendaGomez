@@ -38,6 +38,15 @@ public class Carrito {
 		return resultado;
 	}
 	
+	public boolean vaciarLista() {
+		boolean resultado=false;
+		if(this.items.size()>0) {
+			resultado=true;
+			this.items.clear();
+		}
+		return resultado;
+	}
+	
 	public boolean updateItem(CarritoItem c, int cantidad) {
 		boolean resultado=false;
 		if(items.contains(c)) {

@@ -34,7 +34,7 @@ else{
 
 <div class="container">
 	<div class="divNormal">	
-		<h2>Articulo anadido al carrito:</h2>
+		<h2>Articulo anadido al carrito:</h2><br>
 	
 		<form action="loginExec" method="post">
 			<button class="btn" type="submit">Seguir comprando</button>

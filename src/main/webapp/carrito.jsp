@@ -63,7 +63,8 @@ if(miCarro!=null){
 		}
 	}
 	else{%>
-		<h1>No hay items</h1>
+		<h2>No hay items</h2>
+		
 	<%	
 	}
 		%>
@@ -84,7 +85,7 @@ if(miCarro!=null){
 				}
 			}
 			else{%>
-				<h1>No hay items</h1>
+				<h2>No hay items</h2>
 			<%	
 			}
 			%>
@@ -103,14 +104,20 @@ if(miCarro!=null){
 				precioTotal=Math.round(precioTotal *100.0)/100.0;
 				%>
 				
-				<h1>Total: <%= precioTotal%>€</h1><br><br><br>
+				<h1>Total: <%= precioTotal%>€</h1><br>
 				<form method="post" action="AnadirCompra">
 					<button type="submit" class="btn">Comprar</button>
+				</form><br>
+				<form method="post" action="CancelarCompra">
+					<button type="submit" class="btnCancel">Cancelar</button>
 				</form>
 			<%
 			}
 			else{%>
-				<h1>No hay items</h1>
+				<h2>No hay items</h2><br>
+				<form method="post" action="loginExec">
+					<button type="submit" class="btn">Volver</button>
+				</form>
 			<%	
 			}
 			%>

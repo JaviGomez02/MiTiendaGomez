@@ -65,6 +65,7 @@ public class LoginExec extends HttpServlet {
 		Boolean error=false;
 		int msgError=0;
 		User u = null;
+		String admin="";
 		
 		if (name==null || password==null || name.isEmpty() || password.isEmpty()) { //Si no se han introducido parametros, compruebo la sesion
 			name = (String) sesion.getAttribute("usuario");
@@ -87,9 +88,12 @@ public class LoginExec extends HttpServlet {
 				sesion.setAttribute("login", "True");
 				sesion.setAttribute("usuario", name);
 				sesion.setAttribute("password", password);
-				
+				if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
+					admin="<a href='annadirArticulo.jsp' class='enlace'>Anadir articulo</a>";
+				}
 			}
 		}
+		
 		
 		//Carrito
 		Carrito miCarro=(Carrito) sesion.getAttribute("miCarro");
@@ -98,10 +102,7 @@ public class LoginExec extends HttpServlet {
 			contador=miCarro.getCantidadTotal();
 		}
 		
-		String admin="";
-		if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
-			admin="<a href='annadirArticulo.jsp' class='enlace'>Anadir articulo</a>";
-		}
+		
 		//Si el usuario existe en la base de datos y la contraseña es correcta, accede a la pagina
 		if (!error) {
 
@@ -125,6 +126,7 @@ public class LoginExec extends HttpServlet {
 					+ "		<div class=\"headerRight \">\n"
 					+ "			\n"
 					+ admin
+					+ "<a href='mostrarCompras.jsp' class='enlace'>Ver mis compras</a>"
 					+ "<a href='cerrarSesion.jsp' class='enlace'>Cerrar sesion</a>"
 					+ "			<a href=\"carrito.jsp\" class=\"tooltip\"><img src=\"img/carrito.png\" class=\"carritoImg\"><span class=\"tooltiptext\">"+contador+"</span></a>\n"
 					+ "			<a href=\"index.jsp\" class=\"tooltip\"><img src=\"img/usuario2.png\" class=\"usuarioImg\"><span class=\"tooltiptext\">"+name+"</span></a>\n"

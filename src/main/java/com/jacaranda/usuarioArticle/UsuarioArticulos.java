@@ -33,6 +33,11 @@ public class UsuarioArticulos {
 	
 	Double precio;
 
+	public UsuarioArticulos() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public UsuarioArticulos(User name_usuario, Article id_article, LocalDateTime fecha, int cantidad, Double precio) {
 		super();
 		this.name_usuario = name_usuario;

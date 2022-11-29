@@ -20,16 +20,16 @@ import com.jacaranda.user.User;
 import com.jacaranda.usuarioArticle.UsuarioArticulos;
 
 /**
- * Servlet implementation class AnadirCompra
+ * Servlet implementation class CancelarCompra
  */
-@WebServlet("/AnadirCompra")
-public class AnadirCompra extends HttpServlet {
+@WebServlet("/CancelarCompra")
+public class CancelarCompra extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AnadirCompra() {
+    public CancelarCompra() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,43 +46,31 @@ public class AnadirCompra extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		//Obtengo la sesión
-				HttpSession sesion=request.getSession();
-				
-				//Declaro variables
-				Boolean error=false;
-				int msgError=0;
-				User u = null;
-				
-				if (sesion.getAttribute("usuario")==null || sesion.getAttribute("password")==null) { //Si no se han introducido parametros, compruebo la sesion
-						error=true;
-						msgError=4;
-				}
-				else { //Si existe la sesión recojo el usuario
-					u=UserControl.readUser((String)sesion.getAttribute("usuario"));
-				}
+		HttpSession sesion=request.getSession();
 		
+		//Declaro variables
+		Boolean error=false;
+		int msgError=0;
+		User u = null;
+		
+		if (sesion.getAttribute("usuario")==null || sesion.getAttribute("password")==null) { //Si no se han introducido parametros, compruebo la sesion
+				error=true;
+				msgError=4;
+		}
+		else { //Si existe la sesión recojo el usuario
+			u=UserControl.readUser((String)sesion.getAttribute("usuario"));
+		}
+
 		Carrito miCarro=(Carrito) sesion.getAttribute("miCarro");
 		
 		if(!error) {
-			for(CarritoItem c: miCarro.getItems()) {
-				Article a=ArticleControl.readArticle(c.getIdItem());
-				UsuarioArticulos ua=new UsuarioArticulos(u, a, LocalDateTime.now(), c.getCantidad(), c.getPrecio()*c.getCantidad());
-				UsuarioArticleControl.addUsuarioArticle(ua);
-				
-				int stockActualizado=a.getStock()-c.getCantidad();
-				a.setStock(stockActualizado);
-			}
 			miCarro.vaciarLista();
-			response.sendRedirect("compraRealizada.jsp");
+			response.sendRedirect("carritoVaciado.jsp");
 		}
 		else {
 			response.sendRedirect("error.jsp?msg="+msgError);
-		}
-		
-
-		
+}
 		
 		
 		
