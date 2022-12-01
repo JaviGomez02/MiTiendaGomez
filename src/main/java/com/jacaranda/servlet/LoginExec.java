@@ -76,6 +76,9 @@ public class LoginExec extends HttpServlet {
 			}
 			else { //Si existe la sesión recojo el usuario
 				u=UserControl.readUser(name);
+				if(u.isAdmin()==true) { //Si el usuario es Administrador puede añadir articulo
+					admin="<a href='annadirArticulo.jsp' class='enlace'>Anadir articulo</a>";
+				}
 			}
 		}
 		else {//Si se han introducido parametros, compruebo el usuario
